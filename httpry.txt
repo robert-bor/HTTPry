@@ -1,0 +1,44 @@
+=== GOALS WHICH WOULD BE NICE TO REACH ===
+* ability to change the HTTP Method (ie, GET, POST, DELETE, PUT)
+* ability to change the URL parameters, both in content and amount
+* ability to change the Body content, also binary if possible (ie, upload?)
+* ability to change both the request and the response
+* filter out URLs with registered extensions
+* filter in (or out), domains
+* console showing total number of URLs intercepted, number of those filtered in and out
+
+=== TESTING XUL PAGES IN THE BROWSER ===
+
+Type this in the browser navigation bar to boot up the main page:
+
+  chrome://httpry/content/httpry_main.xul
+
+=== XUL NOTIFICATIONS ===
+
+The various notifications for Mozilla Firefox can be found here:
+
+  https://developer.mozilla.org/en/Observer_Notifications
+
+=== JQUERY AND XUL ===
+
+Add a method to the prototype class:
+
+    loadjQuery: function(wnd){
+        var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
+        loader.loadSubScript("chrome://httpry/content/jquery-xul.js",wnd);
+        return wnd.jQuery.noConflict(true);
+    },
+
+Have a variable '$':
+
+    var $;
+
+Call the prototype method from the method constructing the instance, eg:
+
+    httpryObserver.jquery = httpryObserver.loadjQuery(window);
+    $ = httpryObserver.jquery;
+
+Now JQuery can be called from within the JavaScript. Note that not everything works as good as it does in a non-Chrome
+setting. For example, when appending a child, it is better to append a DOM element then the plain text. For some reason
+the plain text is converted into the DOM, but not shown. Cause unknown.
+

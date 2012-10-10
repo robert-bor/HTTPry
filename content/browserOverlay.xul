@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://httpry/skin/browserOverlay.css" ?>
+
+<!DOCTYPE overlay SYSTEM
+        "chrome://httpry/locale/browserOverlay.dtd">
+
+<overlay id="httpry-browser-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+    <script type="application/x-javascript"
+            src="chrome://httpry/content/browserOverlay.js" />
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="httpry-string-bundle"
+                      src="chrome://httpry/locale/browserOverlay.properties" />
+    </stringbundleset>
+
+    <menupopup id="menu_ToolsPopup">
+        <menuitem
+                id="httpry-menuitem" label="&httpry.menuitem.label;"
+                accesskey="&httpry.menuitem.accesskey;"
+                insertbefore="devToolsEndSeparator"
+                oncommand="HTTPryChrome.BrowserOverlay.openHTTPry(event);" />
+    </menupopup>
+
+</overlay>

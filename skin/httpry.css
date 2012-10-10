@@ -1,0 +1,22 @@
+.main {
+    background: url("chrome://httpry/skin/binary-tunnel.jpg") no-repeat;
+    background-size: 100%;
+}
+
+.button {
+    color: red;
+}
+
+.treetable {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.title {
+    font-size: 18px;
+    color: #FFF;
+}

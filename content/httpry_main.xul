@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://httpry/skin/httpry.css" ?>
+
+<!DOCTYPE overlay SYSTEM "chrome://httpry/locale/httpry.dtd">
+<window id="tamper-window"
+        title="&httpry.httpry_main.title;"
+        windowtype="global:HTTPry"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="startObserving();"
+        onunload="stopObserving();">
+
+<!--<script type="application/x-javascript" src="chrome://httpry/content/jquery-xul.js"/>-->
+<script type="application/x-javascript" src="chrome://httpry/content/httpry_observer.js"/>
+<script type="application/x-javascript" src="chrome://httpry/content/httpry_request.js"/>
+
+    <vbox flex="1" class="main">
+
+        <label value="HTTPry v0.1" class="title"/>
+
+        <spacer style="min-height:5px" />
+
+        <hbox flex="1">
+            <tree id="outputTree" class="treetable" context="outputTree.context" enableColumnDrag="true" flex="1" minheight="150" onselect="" ondblclick="">
+                <treecols>
+                    <treecol id="output.method" label="Method" flex="1" persist="width ordinal hidden" maxwidth="50"/>
+                    <splitter class="tree-splitter" resizeafter="farthest"/>
+                    <treecol id="output.url" label="URL" flex="1" persist="width ordinal hidden"/>
+                    <splitter class="tree-splitter" resizeafter="farthest"/>
+                </treecols>
+                <treechildren id="priedRequests">
+                    <treeitem>
+                        <treerow>
+                            <treecell label='POST'></treecell>
+                            <treecell label='www.donothing.nu'></treecell>
+                        </treerow>
+                    </treeitem>
+                </treechildren>
+            </tree>
+        </hbox>
+
+        <splitter id="masterDetailSplitter" state="open"/>
+
+        <hbox flex="1" class="treetable">
+            <vbox flex="1" class="no-margin">
+                <label value="Request Headers" class="title"/>
+                <listbox id="request list" class="no-margin" flex="1" context="requestTree.context" onselect="oTamper.gui.requestSelectionChange();" ondblclick="oTamper.gui.requestDoubleClick();">
+                    <listcols>
+                        <listcol minwidth="150" flex="1"/>
+                        <listcol flex="2"/>
+                    </listcols>
+                    <listhead>
+                        <listheader label="Name"/>
+                        <listheader label="Value"/>
+                    </listhead>
+                </listbox>
+            </vbox>
+
+            <splitter id="requestResponseSplitter" state="open"/>
+
+            <vbox flex="1" class="no-margin">
+                <label value="Response Headers" class="title"/>
+                <listbox id="response list" class="no-margin" flex="1" context="responseTree.context" onselect="oTamper.gui.responseSelectionChange();" ondblclick="oTamper.gui.responseDoubleClick();">
+                    <listcols>
+                        <listcol minwidth="150" flex="1"/>
+                        <listcol flex="2"/>
+                    </listcols>
+                    <listhead>
+                        <listheader label="Name"/>
+                        <listheader label="Value"/>
+                    </listhead>
+                </listbox>
+            </vbox>
+
+        </hbox>
+
+        <spacer style="min-height:10px" />
+
+    </vbox>
+
+</window>
